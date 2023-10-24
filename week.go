@@ -12,14 +12,7 @@ func WeekStart(t time.Time) time.Time {
 	return t
 }
 
-func WeekEnd(t time.Time) time.Time {
-	t = time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
-	for t.Weekday() != time.Sunday {
-		t = t.AddDate(0, 0, 1)
-	}
-	return t.AddDate(0, 0, 1)
-}
-
+func WeekEnd(t time.Time) time.Time            { return WeekStart(t).AddDate(0, 0, 7) }
 func WeekStartWithOffset(offset int) time.Time { return WeekStart(time.Now()).AddDate(0, 0, 7*offset) }
 func WeekEndWithOffset(offset int) time.Time   { return WeekEnd(time.Now()).AddDate(0, 0, 7*offset) }
 func ThisWeekStart() time.Time                 { return WeekStartWithOffset(0) }
